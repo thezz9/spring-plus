@@ -32,7 +32,10 @@ public class JwtFilter implements Filter {
 
         String url = httpRequest.getRequestURI();
 
-        if (url.startsWith("/auth")) {
+        if (url.startsWith("/auth")
+                || url.startsWith("/swagger-ui")
+                || url.startsWith("/v3/api-docs")
+                || url.startsWith("/swagger-resources")) {
             chain.doFilter(request, response);
             return;
         }
