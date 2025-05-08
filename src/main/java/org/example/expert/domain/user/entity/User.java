@@ -37,6 +37,11 @@ public class User extends Timestamped {
         this.userRole = userRole;
     }
 
+    public User (String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
+    }
+
     public static User fromAuthUser(AuthUser authUser) {
         return new User(authUser.getId(), authUser.getEmail(), authUser.getNickname(), authUser.getUserRole());
     }
