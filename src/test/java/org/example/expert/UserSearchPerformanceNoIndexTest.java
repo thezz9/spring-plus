@@ -1,6 +1,6 @@
 package org.example.expert;
 
-import org.example.expert.domain.user.repository.UserQueryRepository;
+import org.example.expert.config.QuerydslConfig;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,16 +11,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
-@Import(UserQueryRepository.class)
+@Import(QuerydslConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DisplayName("검색 성능 테스트 (no index)")
 public class UserSearchPerformanceNoIndexTest {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private UserQueryRepository userQueryRepository;
 
     private final String sampleNickname = "9592f583-f189-42cc-905b-e30223476732";
 
@@ -55,7 +52,7 @@ public class UserSearchPerformanceNoIndexTest {
     @DisplayName("QueryDSL 성능 테스트")
     @Transactional(readOnly = true)
     public void testQueryDslSearch() {
-        long avg = averageExecutionTime(() -> userQueryRepository.findByNickname(sampleNickname));
+        long avg = averageExecutionTime(() -> userRepository.findByNickname(sampleNickname));
         System.out.println("[QueryDSL 평균 검색 시간] " + avg + " ms");
     }
 
