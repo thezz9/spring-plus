@@ -41,4 +41,18 @@
 ### 11. S3 이미지 URL 웹 접근 테스트
 ![s3-web](https://github.com/user-attachments/assets/74eb8377-2c71-4893-ab2e-fa9720a9f382)
 
+<br>
+
+## 유저 데이터 100만 건 조회 테스트 결과
+
+### 성능 비교 그래프
+![image](https://github.com/user-attachments/assets/95c08a37-d6f3-4184-afc9-346bbb496054)
+
+### 평균 실행 시간 (10회 기준)
+| Query Method | No Index (ms) | With Index (ms) |
+|--------------|---------------|-----------------|
+| JPA          | 1220          | 27              |
+| Native SQL   | 1177          | 8               |
+| JPQL         | 1184          | **2**           |
+| QueryDSL     | **898**       | 24              |
 
